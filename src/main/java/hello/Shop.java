@@ -17,6 +17,12 @@ public class Shop {
     @Field("nombre")
     private String name;
     
+    @Field("direccion")
+    @DBRef
+    private Address address;
+    
+    @Field ("clase")
+    private String type ="big"; 
     
     /*
     
@@ -33,6 +39,12 @@ public class Shop {
 
     public Shop(String name) {
         this.name = name;
+        
+    }
+    
+    public Shop(String name,String type) {
+        this.name = name;
+        this.type = type;
         
     }
 
@@ -52,6 +64,18 @@ public class Shop {
         this.name = name;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     
     
     
@@ -65,8 +89,8 @@ public class Shop {
     @Override
     public String toString() {
         return String.format(
-                "shop[id=%s, name='%s']",
-                id, name);
+                "shop[id=%s, name='%s', type='%s']",
+                id, name,type);
     }
 
 }

@@ -18,6 +18,11 @@ public class ShopService  {
         return shop_repository.findOne(name);
     }
     
+    public List<Shop> getShopsOnlyType(String name){
+        
+        return shop_repository.findByNameOnlyType(name);
+    }
+    
     public void deleteAllShops (){
         shop_repository.deleteAll();
     } 

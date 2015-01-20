@@ -28,12 +28,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @Configuration
 @EnableAutoConfiguration
 // Indicamos el archivo con los datos de la conexiión de mongo.
-@PropertySource("file:/home/juanan/NetBeansProjects/gs-accessing-data-mongodb/complete/src/main/resources/app-config.properties")
+@PropertySource("file:/home/juanan/NetBeansProjects/SpringBootMongoDB/src/main/resources/app-config.properties")
 //@PropertySource(value = "classpath:application.properties")
 public class Application implements CommandLineRunner {
 
 	@Autowired
-	private CustomerRepository customer_repository;
+	private CustomerRepositoryImpl customer_repository;
         
         @Autowired
 	private ShopService shop_service;
@@ -69,6 +69,11 @@ public class Application implements CommandLineRunner {
                 
                 Shop s1 =new Shop("Zara");
                 Shop s2 =new Shop("Mango");
+                Shop s3 =new Shop("Mercadona","small");
+                Shop s4 =new Shop("Dia","small");
+                Shop s5 =new Shop("Hipercor", "big");
+                Shop s6 =new Shop("Carrefour", "big");
+                Shop s7 =new Shop("Carrefour", "small");
                 
                 
                 c1.setAddress(a1);
@@ -90,6 +95,9 @@ public class Application implements CommandLineRunner {
                 s1.getCustomers().add(c1);
                 s1.getCustomers().add(c2);
                 s1.getCustomers().add(c4);
+                
+                s1.setAddress(a3);
+                
                 System.out.println(c1);
                 System.out.println(c2);
                 System.out.println(c3);
@@ -120,6 +128,12 @@ public class Application implements CommandLineRunner {
                 // save a couple of shops
 		shop_service.saveShop(s1);
 		shop_service.saveShop(s2);
+                shop_service.saveShop(s3);
+		shop_service.saveShop(s4);
+                shop_service.saveShop(s5);
+                shop_service.saveShop(s6);
+                shop_service.saveShop(s7);
+		
                 
                 // Familia Blanco/Florencia
                 Customer c5=new Customer("Sandra", "Florencia",27);
@@ -157,10 +171,17 @@ public class Application implements CommandLineRunner {
 			System.out.println(customer);
 		}
                 
-                System.out.println("Addresse found with findByName('Anacardo'):");
+                System.out.println("Address found with findByName('Anacardo'):");
 		System.out.println("--------------------------------");
 		System.out.println(address_repository.findByName("Anacardo"));
 		
+                System.out.println("Shops found with findByNameOnlyType('Carrefour'):");
+		System.out.println("--------------------------------");
+		for (Shop shop : shop_service.getShopsOnlyType("Carrefour")) {
+			System.out.println(shop);
+		}
+                
+               
 
 	}
 

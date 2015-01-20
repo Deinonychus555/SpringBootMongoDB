@@ -10,13 +10,15 @@ import org.springframework.stereotype.Repository;
 
 @Configuration
 @Repository
-public interface CustomerRepository extends MongoRepository<Customer, ObjectId> {
+public interface CustomerRepository  {
 
     public Customer findByFirstName(String firstName);
     public List<Customer> findByLastName(String lastName);
+    public List<Customer> findAll();
     
-    // Devuelve los customers cuyo nombre coincidan con el dado y que tengan 27 años
-    @Query(value = "{ nombre:?0 ,edad: 27}")
     public List<Customer> findByFirstNameOnlyAge(String firstName);
+    public void deleteAll();
+    public void save(Customer customer);
+    
 
 }
